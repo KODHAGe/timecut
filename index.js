@@ -33,6 +33,7 @@
 const timesnap = require('timesnap');
 const path = require('path');
 const fs = require('fs');
+const ffmpeg = require('ffmpeg-static');
 const spawn = require('child_process').spawn;
 const defaultFPS = 60;
 
@@ -132,7 +133,7 @@ module.exports = function (config) {
     }
     // -y writes over existing files
     ffmpegArgs = ffmpegArgs.concat(outputOptions).concat(['-y', output]);
-    convertProcess = spawn('ffmpeg', ffmpegArgs);
+    convertProcess = spawn(ffmpeg, ffmpegArgs);
     convertProcess.stderr.setEncoding('utf8');
     convertProcess.stderr.on('data', function (data) {
       log(data);
